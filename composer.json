@@ -1,0 +1,17 @@
+{
+    "name": "elgmouri/debriefing-system",
+    "description": "debriefing system project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "elgmouri abderrahim",
+            "email": "ea.officialbox@gmail.com"
+        }
+    ],
+    "require": {}
+}
