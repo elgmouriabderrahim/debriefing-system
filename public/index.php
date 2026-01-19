@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-use App\Core\Router;
+require_once __DIR__ . "/../config/env.php";
+use App\Core\Roduter;
 use eftec\bladeone\BladeOne;
 session_start();
 
