@@ -69,6 +69,8 @@ CREATE TABLE briefs (
     end_date TIMESTAMP NOT NULL,
     type brief_type NOT NULL,
     sprint_id INT NOT NULL,
+    instructor_id INT NOT NULL,
+    CONSTRAINT fk_brief_instructor FOREIGN KEY (instructor_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_brief_sprint FOREIGN KEY (sprint_id) REFERENCES sprints(id) ON DELETE CASCADE
 );
 

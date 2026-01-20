@@ -1,7 +1,8 @@
 <?php
+
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . "/../config/env.php";
-use App\Core\Roduter;
+use App\Core\Router;
 use eftec\bladeone\BladeOne;
 session_start();
 
@@ -11,5 +12,5 @@ $cache = __DIR__ . '/../cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 $router = new Router($blade);
 
-$router->get('/', "HomeController@index");
+$router->get('/Admin/dashboard', "AdminDashboardController@index");
 $router->dispatch();
