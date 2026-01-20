@@ -16,4 +16,11 @@ $router->get('/admin/dashboard', "AdminDashboardController@index");
 
 $router->get('/classes', "AdminClassesController@index");
 
+$router->get('/sprints', "AdminSprintsController@index");
+
+$router->get('/competences', "AdminCompetencesController@index");
+
+$router->get('/users', "AdminUsersController@index");
+
+$router->get('/debriefings', "AdminDebriefingsController@index");
 $router->dispatch();

@@ -53,8 +53,10 @@
                             <th class="p-4 text-left">Title</th>
                             <th class="p-4 text-left">Class</th>
                             <th class="p-4 text-left">Instructor</th>
-                            <th class="p-4 text-left">Assigned</th>
-                            <th class="p-4 text-left">Status</th>
+                            <th class="p-4 text-left">Sprint</th>
+                            <th class="p-4 text-left">Start date</th>
+                            <th class="p-4 text-left">End date</th>
+                            <th class="p-4 text-left">Type</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,15 +72,16 @@
                                     {{ $brief['instructor'] }}
                                 </td>
                                 <td class="p-4 text-gray-500">
-                                    {{ $brief['date_assigned'] }}
+                                    {{ $brief['sprint'] }}
                                 </td>
-                                <td class="p-4">
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold
-                                        @if($brief['status'] === 'assigned') bg-green-100 text-green-700
-                                        @else bg-gray-100 text-gray-700
-                                        @endif">
-                                        {{ ucfirst($brief['status']) }}
-                                    </span>
+                                <td class="p-4 text-gray-500">
+                                    {{ $brief['start_date'] }}
+                                </td>
+                                <td class="p-4 text-gray-500">
+                                    {{ $brief['end_date'] }}
+                                </td>
+                                <td class="p-4 text-gray-500">
+                                    {{ $brief['type'] }}
                                 </td>
                             </tr>
                         @empty
