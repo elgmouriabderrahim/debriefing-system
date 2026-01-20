@@ -22,7 +22,7 @@
             <ul class="space-y-1 text-sm">
 
                 <li>
-                    <a href="/dashboard"
+                    <a href="/admin/dashboard"
                        class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-100 transition">
                         Dashboard
                     </a>

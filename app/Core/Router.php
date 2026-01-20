@@ -25,7 +25,7 @@ class Router
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         if($uri == '/')
-            $uri = '/Admin/dashboard';
+            $uri = '/admin/dashboard';
         
         if (isset($this->routes[$requestMethod][$uri])) {
             [$controllerName, $methodName] = explode('@', $this->routes[$requestMethod][$uri]);
