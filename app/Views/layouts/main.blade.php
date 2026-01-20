@@ -55,6 +55,12 @@
                         Users
                     </a>
                 </li>
+                <li>
+                    <a href="/debriefings"
+                       class="flex items-center px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                        debriefings history
+                    </a>
+                </li>
             </ul>
         </nav>
 
