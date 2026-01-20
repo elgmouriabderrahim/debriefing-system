@@ -1,58 +1,156 @@
 @extends('layouts.main')
 
-@section('title')
+@section('title', 'Admin Dashboard')
 
 @section('content')
-<h1 class="text-3xl font-bold mb-6">Welcome</h1>
+<div class="space-y-8">
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-    <div class="bg-white p-4 shadow rounded">
-        <h2 class="text-gray-500">Total Sprints</h2>
-        <p class="text-2xl font-bold">{{ $totalSprints }}</p>
+    {{-- HEADER --}}
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+            <p class="text-gray-500 mt-1">Global overview of the platform</p>
+        </div>
     </div>
-    <div class="bg-white p-4 shadow rounded">
-        <h2 class="text-gray-500">Total Classes</h2>
-        <p class="text-2xl font-bold">{{ $totalClasses }}</p>
-    </div>
-    <div class="bg-white p-4 shadow rounded">
-        <h2 class="text-gray-500">Total Users</h2>
-        <p class="text-2xl font-bold">{{ $totalUsers }}</p>
-    </div>
-</div>
 
-<div class="bg-white shadow rounded p-4 mb-6">
-    <h2 class="text-xl font-bold mb-4">Recent Briefs</h2>
-    <table class="w-full table-auto border-collapse">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="border p-2 text-left">Brief</th>
-                <th class="border p-2 text-left">Class</th>
-                <th class="border p-2 text-left">Instructor</th>
-                <th class="border p-2 text-left">Date Assigned</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($recentBriefs as $brief)
-            <tr class="hover:bg-gray-50">
-                <td class="border p-2">{{ $brief['title'] }}</td>
-                <td class="border p-2">{{ $brief['class'] }}</td>
-                <td class="border p-2">{{ $brief['instructor'] }}</td>
-                <td class="border p-2">{{ $brief['date_assigned'] }}</td>
-                <td class="border p-2">{{ $brief['status'] }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    {{-- KPI GRID --}}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
 
-<div class="bg-white shadow rounded p-4">
-    <h2 class="text-xl font-bold mb-4">Recent Activity</h2>
-    <ul class="space-y-2">
-        @foreach($recentActivity as $activity)
-        <li class="border-b py-2">
-            <span class="font-medium">{{ $activity['user'] }}</span> {{ $activity['action'] }}.
-        </li>
+        @php
+            $stats = [
+                ['label' => 'Total Users', 'value' => $totalUsers, 'color' => 'text-blue-600'],
+                ['label' => 'Students', 'value' => $totalStudents, 'color' => 'text-green-600'],
+                ['label' => 'Instructors', 'value' => $totalInstructors, 'color' => 'text-purple-600'],
+                ['label' => 'Classes', 'value' => $totalClasses, 'color' => 'text-indigo-600'],
+                ['label' => 'Sprints', 'value' => $totalSprints, 'color' => 'text-orange-600'],
+                ['label' => 'Briefs', 'value' => $totalBriefs, 'color' => 'text-red-600'],
+            ];
+        @endphp
+
+        @foreach($stats as $stat)
+            <div class="bg-white rounded-xl shadow-sm border p-5">
+                <p class="text-sm text-gray-500">{{ $stat['label'] }}</p>
+                <p class="text-3xl font-bold mt-2 {{ $stat['color'] }}">
+                    {{ $stat['value'] }}
+                </p>
+            </div>
         @endforeach
-    </ul>
+    </div>
+
+    {{-- MAIN GRID --}}
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+        {{-- RECENT BRIEFS --}}
+        <div class="xl:col-span-2 bg-white rounded-xl shadow-sm border">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-800">Recent Briefs</h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-600">
+                        <tr>
+                            <th class="p-4 text-left">Title</th>
+                            <th class="p-4 text-left">Class</th>
+                            <th class="p-4 text-left">Instructor</th>
+                            <th class="p-4 text-left">Assigned</th>
+                            <th class="p-4 text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($recentBriefs as $brief)
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="p-4 font-medium text-gray-800">
+                                    {{ $brief['title'] }}
+                                </td>
+                                <td class="p-4 text-gray-600">
+                                    {{ $brief['class'] }}
+                                </td>
+                                <td class="p-4 text-gray-600">
+                                    {{ $brief['instructor'] }}
+                                </td>
+                                <td class="p-4 text-gray-500">
+                                    {{ $brief['date_assigned'] }}
+                                </td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold
+                                        @if($brief['status'] === 'assigned') bg-green-100 text-green-700
+                                        @else bg-gray-100 text-gray-700
+                                        @endif">
+                                        {{ ucfirst($brief['status']) }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="p-6 text-center text-gray-500">
+                                    No briefs found
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {{-- ACTIVITY FEED --}}
+        <div class="bg-white rounded-xl shadow-sm border">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
+            </div>
+
+            <div class="p-6 space-y-4">
+                @forelse($recentActivity as $activity)
+                    <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 mt-2 rounded-full bg-blue-500"></div>
+                        <div>
+                            <p class="text-sm text-gray-800">
+                                <span class="font-semibold">{{ $activity['user'] }}</span>
+                                {{ $activity['action'] }}
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">
+                                {{ $activity['date'] }}
+                            </p>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-500 text-center">
+                        No recent activity
+                    </p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    {{-- QUICK ACTIONS --}}
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Admin Actions</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="#" class="block p-4 border rounded-lg hover:bg-gray-50">
+                <p class="font-medium text-gray-800">Create Class</p>
+                <p class="text-sm text-gray-500">Add a new class</p>
+            </a>
+
+            <a href="#" class="block p-4 border rounded-lg hover:bg-gray-50">
+                <p class="font-medium text-gray-800">Add User</p>
+                <p class="text-sm text-gray-500">Student or instructor</p>
+            </a>
+
+            <a href="#" class="block p-4 border rounded-lg hover:bg-gray-50">
+                <p class="font-medium text-gray-800">Create Sprint</p>
+                <p class="text-sm text-gray-500">Plan new sprint</p>
+            </a>
+
+            <a href="#" class="block p-4 border rounded-lg hover:bg-gray-50 transition">
+                <p class="font-medium text-gray-800">Add Competence</p>
+                <p class="text-sm text-gray-500 mt-1">
+                    New skill definition
+                </p>
+            </a>
+
+        </div>
+    </div>
+
 </div>
 @endsection
