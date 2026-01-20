@@ -12,5 +12,8 @@ $cache = __DIR__ . '/../cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 $router = new Router($blade);
 
-$router->get('/Admin/dashboard', "AdminDashboardController@index");
+$router->get('/admin/dashboard', "AdminDashboardController@index");
+
+$router->get('/classes', "AdminClassesController@index");
+
 $router->dispatch();
