@@ -36,7 +36,7 @@ class Router
         }
 
         $controllerClass = "App\\Controllers\\NotFoundController";
-        $controller = new $controllerClass();
+        $controller = new $controllerClass($this->blade);
         $controller->index();
     }
 }
