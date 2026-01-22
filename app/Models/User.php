@@ -14,7 +14,6 @@ abstract class User
     private UserRole $role;
     private string $password;
     private DateTime $createdAt;
-    private ?Classroom $classroom;
 
     public function __construct($data) {
         $this->id = $data['id'];
@@ -24,7 +23,6 @@ abstract class User
         $this->password = $data['password'];
         $this->createdAt = new DateTime ($data['created_at']);
         $this->role = UserRole::from($data['role']);
-        $this->classroom = $data['classroom'] ?? null;
     }
 
     public function getId(): int {return $this->id;}
@@ -32,7 +30,6 @@ abstract class User
     public function getRole(): UserRole { return $this->role; }
     public function getEmail(): string { return $this->email; }
     public function getCreatedAt(): DateTime { return $this->createdAt; }
-    public function getClassroom(): ?Classroom { return $this->classroom; }
 
     public function verifyPassword(string $password): bool {
         return password_verify($password, $this->password);

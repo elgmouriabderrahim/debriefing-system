@@ -17,7 +17,7 @@ $router->get('/admin/sprints', "AdminSprintsController@index");
 $router->get('/admin/competences', "AdminCompetencesController@index");
 
 $router->get('/admin/users', "AdminUsersController@index");
-$router->get('/admin/user/add', "AdminUsersController@addUser");
+$router->get('/admin/user/add', "AdminUsersController@showAddForm");
 $router->post('/admin/user/add', "AdminUsersController@addUser");
 
 $router->get('/admin/debriefings', "AdminDebriefingsController@index");
