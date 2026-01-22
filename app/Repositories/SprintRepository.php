@@ -13,5 +13,12 @@ class SprintRepository {
         $sprint = SprintDao::getById($id);
         return SprintMapper::mapToObj($sprint);
     }
+    public static function findAll(): array {
+        $sprints = SprintDao::findAll();
+        if(empty($sprints)){
+            return [];
+        }
+        return SprintMapper::mapToObjArray($sprints);
+    }
 }
 

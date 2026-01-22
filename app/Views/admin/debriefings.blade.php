@@ -12,6 +12,7 @@
     </div>
 
     <div class="bg-white border rounded-xl shadow-sm overflow-hidden">
+        @if(!empty($debriefings))
         <table class="w-full text-sm">
             <thead class="bg-gray-50 border-b text-gray-600">
                 <tr>
@@ -40,6 +41,11 @@
             </tbody>
 
         </table>
+        @else
+         <div class="p-6 text-center text-gray-500">
+            No Debriefings found.
+        </div>
+        @endif
     </div>
 
 </div>

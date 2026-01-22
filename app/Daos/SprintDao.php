@@ -19,4 +19,10 @@ class SprintDao {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
+    public static function findAll(): array {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM sprints");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -22,27 +22,46 @@
         <table class="w-full text-sm">
             <thead class="bg-gray-50 border-b text-gray-600">
                 <tr>
-                    <th class="p-4 text-left">Name</th>
+                    <th class="p-4 text-left">Full Name</th>
                     <th class="p-4 text-left">Email</th>
                     <th class="p-4 text-left">Role</th>
-                    <th class="p-4 text-left">Joined</th>
+                    <th class="p-4 text-left">Created At</th>
+                    <th class="p-4 text-left">Classroom</th>
+                    <th class="p-4 text-left">Actions</th>
+
                 </tr>
             </thead>
 
             <tbody>
                 @foreach($users as $user)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="p-4 font-medium">{{ $user->name }}</td>
-                    <td class="p-4 text-gray-600">{{ $user->email }}</td>
+                    <td class="p-4 font-medium">{{ $user->getFullName() }}</td>
+                    <td class="p-4 text-gray-600">{{ $user->getEmail() }}</td>
                     <td class="p-4">
                         <span class="px-2 py-1 text-xs rounded-full
-                            {{ $user->role === 'Admin' ? 'bg-red-100 text-red-700' :
-                               ($user->role === 'Instructor' ? 'bg-purple-100 text-purple-700' :
+                            {{ $user->getRole() === 'Admin' ? 'bg-red-100 text-red-700' :
+                               ($user->getRole() === 'Instructor' ? 'bg-purple-100 text-purple-700' :
                                'bg-green-100 text-green-700') }}">
-                            {{ $user->role }}
+                            {{ $user->getRole()->value }}
                         </span>
                     </td>
-                    <td class="p-4 text-gray-500">{{ $user->created_at }}</td>
+                    <td class="p-4 text-gray-500">{{ $user->getCreatedAt()->format('Y-m-d H:i:s') }}</td>
+                    @if($user->getClassroom())
+                    <td class="p-4 text-gray-500">{{ $user->getClassroom()->getName() }}</td>
+                    @else
+                    <td class="p-4 text-gray-500 italic">N/A</td>
+                    @endif
+                    <td class="p-4 flex space-x-2">
+                    @if($user->getRole()->value === "Instructor")
+                        <a href="/admin/user/assign/{{ $user->getId() }}" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-blue-700 text-xs">Assign Class</a>
+                        <a href="/admin/user/delete/{{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                    @elseif($user->getRole()->value === "Learner")
+                        <a href="/admin/user/assign-class/{{ $user->getId() }}" class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs">Assign to Class</a>
+                        <a href="/admin/user/delete/{{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                    @else
+                        <span class="text-gray-400 text-xs italic">No actions available</span>
+                    @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
