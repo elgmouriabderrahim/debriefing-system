@@ -46,7 +46,7 @@
                         </span>
                     </td>
                     <td class="p-4 text-gray-500">{{ $user->getCreatedAt()->format('Y-m-d H:i:s') }}</td>
-                    @if($user->getClassroom())
+                    @if($user->getRole() === 'Learner')
                     <td class="p-4 text-gray-500">{{ $user->getClassroom()->getName() }}</td>
                     @else
                     <td class="p-4 text-gray-500 italic">N/A</td>

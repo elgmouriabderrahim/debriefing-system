@@ -85,5 +85,36 @@ class UserDao {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function addUser(array $userData): void {
+        $pdo = Database::getInstance()->getconnection();
+        $hashedPassword = password_hash($userData['password'], PASSWORD_DEFAULT);
+        
+        $stmt = $pdo->prepare("
+            INSERT INTO users (first_name, last_name, email, password, role)
+            VALUES (:firstName, :lastName, :email, :password, :role)
+        ");
+                
+        $stmt->execute([
+            ':firstName' => $userData['firstName'],
+            ':lastName' => $userData['lastName'],
+            ':email' => $userData['email'],
+            ':password' => $hashedPassword,
+            ':role' => $userData['role']
+        ]);
+    }
+
+    public static function isEmailExists(string $email): bool {
+        $pdo = Database::getInstance()->getconnection();
+        
+        $stmt = $pdo->prepare("
+            SELECT 1 FROM users where email = :email
+        ");
+                
+        $stmt->execute([
+            ':email' => $email
+        ]);
+        return (bool) $stmt->fetchColumn();
+    }
     
 }

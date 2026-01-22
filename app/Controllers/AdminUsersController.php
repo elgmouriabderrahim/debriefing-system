@@ -13,10 +13,30 @@ class AdminUsersController extends BaseController{
                 compact('users')
             );
     }
-    public function addUser() {
+    public function showAddForm() {
         echo $this->render(
                 'admin.users.add',
                 []
+            );
+    }
+    public function addUser(){
+        $inputData['firstName'] = $_POST['firstName'] ?? '';
+        $inputData['lastName'] = $_POST['lastName'] ?? '';
+        $inputData['email'] = $_POST['email'] ?? '';
+        $inputData['password'] = $_POST['password'] ?? '';
+        $inputData['cpassword'] = $_POST['cpassword'] ?? '';
+        $inputData['role'] = $_POST['role'] ?? '';
+        
+        $userService = UserService::getInstance();
+        $success = null;
+        $errors = $userService->addUser($inputData);
+        if(empty($errors)){
+            $success = 'the user is regestered succesfully';
+            $inputData = [];
+        }
+        echo $this->render(
+                'admin.users.add',
+                compact('errors', 'inputData', 'success')
             );
     }
 }

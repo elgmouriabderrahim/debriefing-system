@@ -11,14 +11,12 @@
     </p>
 
     <?php if(isset($success) && $success): ?>
-        <div class="bg-green-100 border border-green-400 text-green-700 p-3 rounded mb-4">
+        <div class="bg-green-100 border border-green-300 text-green-800 p-3 rounded-lg mb-4">
             <?= htmlspecialchars($success) ?>
         </div>
     <?php endif; ?>
 
     <form action="/admin/user/add" method="post" class="space-y-4">
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
-
         <div class="relative">
             <label for="firstName" class="block text-sm font-medium text-gray-800">First Name</label>
             <div class="relative">
