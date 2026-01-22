@@ -7,7 +7,7 @@ class Sprint
     private string $name;
     private int $duration;
     private int $order;
-    private Classroom $classroom;
+    private ?Classroom $classroom;
 
     public function __construct($data) {
         $this->id = $data['id'];

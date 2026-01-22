@@ -1,7 +1,7 @@
 <?php
 namespace App\Daos;
-use PDO;
 use App\Core\Database;
+use PDO;
 class BriefDao {
 
     public static function countAll(): int {

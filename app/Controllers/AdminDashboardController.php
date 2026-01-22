@@ -12,16 +12,16 @@ use App\Services\BriefService;
 class AdminDashboardController extends BaseController{
 
     public function index() {
-        $userService = new UserService();
-        $classService = new ClassService();
-        $sprintService = new SprintService();
-        $briefService = new BriefService();
+        $userService = UserService::getInstance();
+        $classService = ClassService::getInstance();
+        $sprintService = SprintService::getInstance();
+        $briefService = BriefService::getInstance();
 
-        $totalUsers = $userService->getTotalUsers();
-        $totalLearners = $userService->getTotalLearners();
-        $totalInstructors = $userService->getTotalInstructors();
-        $totalClasses = $classService->getTotalClasses();
-        $totalSprints = $sprintService->getTotalSprints();
+        $totalUsers = $userService->getUsersCount();
+        $totalLearners = $userService->getLearnersCount();
+        $totalInstructors = $userService->getInstructorsCount();
+        $totalClasses = $classService->geClassesCount();
+        $totalSprints = $sprintService->getSprintsCount();
         $totalBriefs = $briefService->getTotalBriefs();
 
         $recentBriefs = $briefService->getRecentBriefs(5);

@@ -9,4 +9,10 @@ class SprintMapper {
 
         return new Sprint($sprint);
     }
+    public static function mapToObjArray(array $sprints): array {
+        
+        return array_map(function($sprint) {
+            return new Sprint($sprint);
+        }, $sprints);
+    }
 }   

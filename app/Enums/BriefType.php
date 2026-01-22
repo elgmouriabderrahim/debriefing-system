@@ -1,5 +1,7 @@
-<php
+<?php
+
 namespace App\Enums;
+
 enum BriefType: string
 {
     case Individuel = 'Individuel';

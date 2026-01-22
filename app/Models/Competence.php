@@ -15,7 +15,7 @@ class Competence
         $this->id = $data['id'];
         $this->code = $data['code'];
         $this->label = $data['label'];
-        $this->level = masteryLevel::from($data['level']);
+        $this->level = masteryLevel::from($data['level']) ?? null;
     }
 
     public function getCode(): string {return $this->code;}

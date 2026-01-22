@@ -19,35 +19,51 @@
     </div>
 
     <div class="bg-white border rounded-xl shadow-sm overflow-hidden">
+        @if(!empty($sprints))
         <table class="w-full text-sm">
             <thead class="bg-gray-50 border-b text-gray-600">
                 <tr>
                     <th class="p-4 text-left">Sprint</th>
-                    <th class="p-4 text-left">Class</th>
-                    <th class="p-4 text-left">Start</th>
-                    <th class="p-4 text-left">End</th>
-                    <th class="p-4 text-left">Status</th>
+                    <th class="p-4 text-left">Duration</th>
+                    <th class="p-4 text-left">Order</th>
+                    <th class="p-4 text-left">Classroom</th>
+                    <th class="p-4 text-left">Actions</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach($sprints as $sprint)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="p-4 font-medium">{{ $sprint->title }}</td>
-                    <td class="p-4 text-gray-600">{{ $sprint->class }}</td>
-                    <td class="p-4 text-gray-500">{{ $sprint->start_date }}</td>
-                    <td class="p-4 text-gray-500">{{ $sprint->end_date }}</td>
-                    <td class="p-4">
-                        <span class="px-2 py-1 text-xs rounded-full
-                            {{ $sprint->status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">
-                            {{ ucfirst($sprint->status) }}
-                        </span>
+                    <td class="p-4 font-medium">{{ $sprint->getTitle() }}</td>
+                    <td class="p-4 text-gray-600">{{ $sprint->getDuration() }}</td>
+                    <td class="p-4 text-gray-500">{{ $sprint->getOrder()}}</td>
+                    <td class="p-4 text-gray-500">{{ $sprint->getClassroom()->getName() }}</td>
+                    <td class="p-4 space-x-2">
+                        <a href="/admin/sprints/{{ $sprint->getId() }}" class="text-blue-600 hover:underline">
+                            View
+                        </a>
+
+                        <a href="/admin/sprints/edit/{{ $sprint->getId() }}" class="text-gray-600 hover:underline">
+                            Edit
+                        </a>
+
+                        <form action="/admin/sprints/delete/{{ $sprint->getId() }}" method="POST" class="inline">
+                            <button type="submit" class="text-red-600 hover:underline">
+                                Delete
+                            </button>
+                        </form>
                     </td>
+
                 </tr>
                 @endforeach
             </tbody>
 
         </table>
+        @else
+        <div class="p-6 text-gray-600 text-center">
+            No sprints found.
+        </div>
+        @endif
     </div>
 
 </div>
