@@ -54,10 +54,10 @@
                     <td class="p-4 flex space-x-2">
                     @if($user->getRole()->value === "Instructor")
                         <a href="/admin/user/assign/{{ $user->getId() }}" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-blue-700 text-xs">Assign Class</a>
-                        <a href="/admin/user/delete/{{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
                     @elseif($user->getRole()->value === "Learner")
                         <a href="/admin/user/assign-class/{{ $user->getId() }}" class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs">Assign to Class</a>
-                        <a href="/admin/user/delete/{{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
                     @else
                         <span class="text-gray-400 text-xs italic">No actions available</span>
                     @endif

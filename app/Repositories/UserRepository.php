@@ -41,4 +41,8 @@ class UserRepository {
     public static function isEmailExists(string $email): bool {
         return UserDao::isEmailExists($email);
     }
+
+    public static function deleteUser(int $id): void {
+        UserDao::deleteUser($id);
+    }
 }

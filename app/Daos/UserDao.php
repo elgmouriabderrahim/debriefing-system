@@ -116,5 +116,9 @@ class UserDao {
         ]);
         return (bool) $stmt->fetchColumn();
     }
-    
+    public static function deleteUser(int $id): void {
+        $db = Database::getInstance()->getconnection();
+        $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+    }
 }
