@@ -17,7 +17,7 @@ CREATE TYPE mastery_level AS ENUM (
 
 CREATE TABLE classes (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL, 
+    name VARCHAR(100) NOT NULL,
     promotion_year INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

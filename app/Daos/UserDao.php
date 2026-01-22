@@ -72,5 +72,18 @@ class UserDao {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function getClassInstructors(int $classId): array {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE class_id = :classId AND role = 'Instructor'");
+        $stmt->bindValue(':classId', $classId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function getAll(): array {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 use DateTime;
 use App\Enums\UserRole;
+use App\Models\Classroom;
 
 abstract class User
 {
@@ -13,23 +14,25 @@ abstract class User
     private UserRole $role;
     private string $password;
     private DateTime $createdAt;
+    private ?Classroom $classroom;
 
     public function __construct($data) {
         $this->id = $data['id'];
-        $this->firstName = $data['firstName'];
-        $this->lastName = $data['lastName'];
+        $this->firstName = $data['first_name'];
+        $this->lastName = $data['last_name'];
         $this->email = $data['email'];
         $this->password = $data['password'];
-        $this->createdAt = new DateTime ($data['createdAt']);
+        $this->createdAt = new DateTime ($data['created_at']);
         $this->role = UserRole::from($data['role']);
+        $this->classroom = $data['classroom'] ?? null;
     }
 
     public function getId(): int {return $this->id;}
     public function getFullName(): string {return $this->firstName . ' ' . $this->lastName;}
     public function getRole(): UserRole { return $this->role; }
-    public function getClassroom(): Classroom { return $this->classroom; }
     public function getEmail(): string { return $this->email; }
     public function getCreatedAt(): DateTime { return $this->createdAt; }
+    public function getClassroom(): ?Classroom { return $this->classroom; }
 
     public function verifyPassword(string $password): bool {
         return password_verify($password, $this->password);

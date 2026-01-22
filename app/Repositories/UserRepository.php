@@ -22,5 +22,18 @@ class UserRepository {
     public static function getRecentUserActivity(int $limit): array {
         return UserDao::getRecentUserActivity($limit);
     }
+
+    public static function getClassInstractors(int $classId): array {
+        $instructors = UserDao::getClassInstructors($classId);
+        if (empty($instructors))
+            return [];
+        return UserMapper::mapToInstractorsArray($instructors);
+    }
+    public static function getAll(): array {
+        $users = UserDao::getAll();
+        if (empty($users))
+            return [];
+        return UserMapper::mapToUsersArray($users);
+    }
     
 }
