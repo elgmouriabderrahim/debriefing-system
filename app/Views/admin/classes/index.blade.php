@@ -13,7 +13,7 @@
             <p class="text-gray-500 text-sm">Manage all learning groups</p>
         </div>
 
-        <a href="/classes/create"
+        <a href="/admin/classes/create"
            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             + Create Class
         </a>
@@ -40,8 +40,8 @@
                     <td class="p-4 text-gray-600">{{ $class->instructor }}</td>
                     <td class="p-4 text-gray-500">{{ $class->created_at }}</td>
                     <td class="p-4 text-right space-x-2">
-                        <a href="/classes/{{ $class->id }}" class="text-blue-600 hover:underline">View</a>
-                        <a href="/classes/{{ $class->id }}/edit" class="text-gray-600 hover:underline">Edit</a>
+                        <a href="/admin/classes/{{ $class->id }}" class="text-blue-600 hover:underline">View</a>
+                        <a href="/admin/classes/{{ $class->id }}/edit" class="text-gray-600 hover:underline">Edit</a>
                     </td>
                 </tr>
                 @empty

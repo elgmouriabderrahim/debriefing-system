@@ -12,7 +12,7 @@
             <p class="text-gray-500 text-sm">Manage sprint cycles</p>
         </div>
 
-        <a href="/sprints/create"
+        <a href="/admin/sprints/create"
            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             + Create Sprint
         </a>

@@ -12,7 +12,7 @@
             <p class="text-gray-500 text-sm">Students, instructors and admins</p>
         </div>
 
-        <a href="/users/create"
+        <a href="/admin/user/add"
            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             + Add User
         </a>

@@ -12,7 +12,7 @@
             <p class="text-gray-500 text-sm">Skill definitions & mastery levels</p>
         </div>
 
-        <a href="/competences/create"
+        <a href="/admin/competences/create"
            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             + Add Competence
         </a>
@@ -36,7 +36,7 @@
                     <td class="p-4 font-medium">{{ $competence->label }}</td>
                     <td class="p-4 text-gray-600">{{ $competence->sprints_count }}</td>
                     <td class="p-4 text-right">
-                        <a href="/competences/{{ $competence->id }}/edit" class="text-gray-600 hover:underline">
+                        <a href="/admin/competences/{{ $competence->id }}/edit" class="text-gray-600 hover:underline">
                             Edit
                         </a>
                     </td>

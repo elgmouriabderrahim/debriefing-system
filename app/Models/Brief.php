@@ -10,6 +10,7 @@ class Brief
     private string $title;
     private string $content;
     private Sprint $sprint;
+    private Instructor $instructor;
     private DateTime $startDate;
     private DateTime $endDate;
     private BriefType $type;
@@ -19,6 +20,7 @@ class Brief
         $this->title = $data['title'];
         $this->content = $data['content'];
         $this->sprint = $data['sprint'];
+        $this->instructor = $data['instructor'];
         $this->startDate = new DateTime($data['start_date']);
         $this->endDate = new DateTime($data['end_date']);
         $this->type = BriefType::from($data['type']);
