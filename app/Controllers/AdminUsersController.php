@@ -5,10 +5,15 @@ class AdminUsersController extends BaseController{
 
     public function index() {
         $users = [];
-
         echo $this->render(
                 'admin.users.index',
                 compact('users')
+            );
+    }
+    public function addUser() {
+        echo $this->render(
+                'admin.users.add',
+                []
             );
     }
 }

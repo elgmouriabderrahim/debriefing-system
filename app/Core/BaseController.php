@@ -1,19 +1,12 @@
 <?php
 namespace App\Core;
-
-use eftec\bladeone\BladeOne;
+use App\Core\ViewFactory;
 
 abstract class BaseController
 {
-    protected BladeOne $blade;
-
-    public function __construct(BladeOne $blade)
-    {
-        $this->blade = $blade;
-    }
-
     protected function render(string $view, array $data = [])
     {
-        echo $this->blade->run($view, $data);
+        $blade = ViewFactory::init();
+        echo $blade->run($view, $data);
     }
 }
