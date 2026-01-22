@@ -48,4 +48,8 @@ class UserService {
             UserRepository::addUser($inputData);
         return $errors;
     }
+
+    public function deleteUser(int $id): void {
+        UserRepository::deleteUser($id);
+    }
 }

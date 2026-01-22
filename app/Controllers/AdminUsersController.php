@@ -39,4 +39,14 @@ class AdminUsersController extends BaseController{
                 compact('errors', 'inputData', 'success')
             );
     }
+    public function deleteUser(){
+        $userId = $_GET['user_id'];
+        if(!$userId){
+            die('user id missing');
+            exit;
+        }
+        $userService = UserService::getInstance();
+        $userService->deleteUser($userId);
+        header("location: /admin/users");
+    }
 }
