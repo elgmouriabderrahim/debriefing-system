@@ -5,7 +5,6 @@
 @section('content')
 <div class="space-y-8">
 
-    {{-- HEADER --}}
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
@@ -13,13 +12,12 @@
         </div>
     </div>
 
-    {{-- KPI GRID --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
 
         @php
             $stats = [
                 ['label' => 'Total Users', 'value' => $totalUsers, 'color' => 'text-blue-600'],
-                ['label' => 'Students', 'value' => $totalStudents, 'color' => 'text-green-600'],
+                ['label' => 'Students', 'value' => $totalLearners, 'color' => 'text-green-600'],
                 ['label' => 'Instructors', 'value' => $totalInstructors, 'color' => 'text-purple-600'],
                 ['label' => 'Classes', 'value' => $totalClasses, 'color' => 'text-indigo-600'],
                 ['label' => 'Sprints', 'value' => $totalSprints, 'color' => 'text-orange-600'],
@@ -37,15 +35,13 @@
         @endforeach
     </div>
 
-    {{-- MAIN GRID --}}
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
-        {{-- RECENT BRIEFS --}}
         <div class="xl:col-span-2 bg-white rounded-xl shadow-sm border">
             <div class="p-6 border-b">
                 <h2 class="text-xl font-semibold text-gray-800">Recent Briefs</h2>
             </div>
-
+            @if(!empty($recentActivity))
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead class="bg-gray-50 text-gray-600">
@@ -60,43 +56,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($recentBriefs as $brief)
+                        @foreach($recentBriefs as $brief)
                             <tr class="border-t hover:bg-gray-50">
                                 <td class="p-4 font-medium text-gray-800">
-                                    {{ $brief['title'] }}
+                                    {{ $brief->getTitle() }}
                                 </td>
                                 <td class="p-4 text-gray-600">
-                                    {{ $brief['class'] }}
+                                    {{ $brief->getClass() }}
                                 </td>
                                 <td class="p-4 text-gray-600">
-                                    {{ $brief['instructor'] }}
+                                    {{ $brief->getInstructor() }}
                                 </td>
                                 <td class="p-4 text-gray-500">
-                                    {{ $brief['sprint'] }}
+                                    {{ $brief->getSprint() }}
                                 </td>
                                 <td class="p-4 text-gray-500">
-                                    {{ $brief['start_date'] }}
+                                    {{ $brief->getStartDate() }}
                                 </td>
                                 <td class="p-4 text-gray-500">
-                                    {{ $brief['end_date'] }}
+                                    {{ $brief->getEndDate() }}
                                 </td>
                                 <td class="p-4 text-gray-500">
-                                    {{ $brief['type'] }}
+                                    {{ $brief->getType() }}
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="p-6 text-center text-gray-500">
-                                    No briefs found
-                                </td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            @else
+            <div class="p-6 text-center text-gray-500">
+                No briefs found.
+            </div>
+            @endif
         </div>
 
-        {{-- ACTIVITY FEED --}}
         <div class="bg-white rounded-xl shadow-sm border">
             <div class="p-6 border-b">
                 <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
@@ -125,7 +119,6 @@
         </div>
     </div>
 
-    {{-- QUICK ACTIONS --}}
     <div class="bg-white rounded-xl shadow-sm border p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Admin Actions</h2>
 
@@ -135,7 +128,7 @@
                 <p class="text-sm text-gray-500">Add a new class</p>
             </a>
 
-            <a href="#" class="block p-4 border rounded-lg hover:bg-gray-50">
+            <a href="/admin/user/add" class="block p-4 border rounded-lg hover:bg-gray-50">
                 <p class="font-medium text-gray-800">Add User</p>
                 <p class="text-sm text-gray-500">Student or instructor</p>
             </a>
