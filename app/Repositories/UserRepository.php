@@ -35,5 +35,10 @@ class UserRepository {
             return [];
         return UserMapper::mapToUsersArray($users);
     }
-    
+    public static function addUser($inputData){
+        return UserDao::addUser($inputData);
+    }
+    public static function isEmailExists(string $email): bool {
+        return UserDao::isEmailExists($email);
+    }
 }

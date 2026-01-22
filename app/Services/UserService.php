@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Repositories\UserRepository;
+use App\Helpers\Helpers;
 
 class UserService {
     private static ?UserService $instance = null;
@@ -30,5 +31,21 @@ class UserService {
     public function getAll(): array {
         return UserRepository::getAll();
     }
-    
+    public function addUser($inputData){
+        $errors = [];
+        
+        $errors = [
+            ...Helpers::ValidateName($inputData['firstName'], 'firstName'),
+            ...Helpers::ValidateName($inputData['lastName'], 'lastName'),
+            ...Helpers::ValidateEmail($inputData['email']),
+            ...Helpers::ValidatePassword($inputData['password'], $inputData['cpassword']),
+            ...Helpers::ValidateRole($inputData['role'])
+        ];
+        if(UserRepository::isEmailExists($inputData['email']))
+            $errors = array_merge($errors, ['email' => 'email already exist choose another email']);
+
+        if(empty($errors))
+            UserRepository::addUser($inputData);
+        return $errors;
+    }
 }
