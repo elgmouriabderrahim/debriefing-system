@@ -124,7 +124,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
 
-            <a href="admin/class/create" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-blue-50 transition transform hover:-translate-y-1 min-h-[120px]">
+            <a href="/admin/class/create" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-green-50 transition transform hover:-translate-y-1 min-h-[120px]">
                 <p class="font-semibold text-gray-900 text-lg mb-2">Create Class</p>
                 <p class="text-gray-500 text-sm">Add a new class to the system</p>
             </a>
@@ -134,12 +134,12 @@
                 <p class="text-gray-500 text-sm">Student or instructor</p>
             </a>
 
-            <a href="admin/sprint/create" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-purple-50 transition transform hover:-translate-y-1 min-h-[120px]">
+            <a href="/admin/sprint/create" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-purple-50 transition transform hover:-translate-y-1 min-h-[120px]">
                 <p class="font-semibold text-gray-900 text-lg mb-2">Create Sprint</p>
                 <p class="text-gray-500 text-sm">Plan a new sprint</p>
             </a>
 
-            <a href="admin/competence/add" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-yellow-50 transition transform hover:-translate-y-1 min-h-[120px]">
+            <a href="/admin/competence/add" class="block p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:bg-yellow-50 transition transform hover:-translate-y-1 min-h-[120px]">
                 <p class="font-semibold text-gray-900 text-lg mb-2">Add Competence</p>
                 <p class="text-gray-500 text-sm">Define a new skill</p>
             </a>

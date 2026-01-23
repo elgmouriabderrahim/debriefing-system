@@ -11,6 +11,11 @@ $router = new Router();
 $router->get('/admin/dashboard', "AdminDashboardController@index");
 
 $router->get('/admin/classes', "AdminClassesController@index");
+$router->get('/admin/class/create', "AdminClassesController@showCreateForm");
+$router->post('/admin/class/create', "AdminClassesController@create");
+$router->get('/admin/class/view', "AdminClassesController@view");
+$router->post('/admin/class/delete', "AdminClassesController@delete");
+
 
 $router->get('/admin/sprints', "AdminSprintsController@index");
 

@@ -6,8 +6,7 @@ class ClassDao {
     
     public static function countAll(): int {
         $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM classes");
-        $stmt->execute();
+        $stmt = $pdo->query("SELECT COUNT(*) as total FROM classes");
         return (int) $stmt->fetchColumn();
     }
     public static function getAll(): array {
@@ -22,5 +21,85 @@ class ClassDao {
         $stmt->bindValue(':classId', $classId, PDO::PARAM_INT);
         $stmt->execute();
         return (int) $stmt->fetchColumn();
+    }
+    public static function create(array $inputData): void {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("INSERT INTO classes(name, promotion_year) values(:name, :promotionYear)");
+        $stmt->execute(['name' => $inputData['name'], 'promotionYear' => $inputData['promotionYear']]);
+    }
+
+    public static function findById(int $id): ?array
+    {
+        $pdo = Database::getInstance()->getconnection();
+
+        $stmt = $pdo->prepare(
+            "SELECT 
+                c.*,
+                COUNT(u.id) AS students_count
+            FROM classes c
+            LEFT JOIN users u 
+                ON u.class_id = c.id AND u.role = 'Learner'
+            WHERE c.id = :id
+            GROUP BY c.id
+        ");
+
+        $stmt->execute(['id' => $id]);
+        $class = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$class) {
+            return null;
+        }
+
+        $stmt = $pdo->prepare("
+            SELECT u.*
+            FROM users u
+            JOIN class_instructors ci ON ci.instructor_id = u.id
+            WHERE ci.class_id = :id
+        ");
+
+        $stmt->execute(['id' => $id]);
+        $class['instructors'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $class;
+    }
+
+    public static function delete(int $id): void
+    {
+        $pdo = Database::getInstance()->getconnection();
+
+        $stmt = $pdo->prepare("DELETE FROM classes WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+    }
+
+    public static function getClassLearners(int $classId): array
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare(
+            "SELECT *
+            FROM users
+            WHERE class_id = :class_id
+        ");
+
+        $stmt->execute([
+            ':class_id' => $classId
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getClassInstractors(int $classId): array
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare(
+            "SELECT u.*
+            FROM users u
+            INNER JOIN class_instructors ci ON ci.instructor_id = u.id
+            WHERE ci.class_id = :class_id
+        ");
+
+        $stmt->execute([
+            ':class_id' => $classId
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

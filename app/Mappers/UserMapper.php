@@ -4,7 +4,6 @@ namespace App\Mappers;
 use App\Models\Instructor;
 use App\Models\Learner;
 use App\Models\Admin;
-use App\Models\User;
 
 class UserMapper {
     public static function mapArrayToObj(array $user): User {
@@ -19,11 +18,7 @@ class UserMapper {
             return new Admin($user);
         }
     }
-    public static function mapToInstractorsArray(array $instractors): array {
-        return array_map(function($instractors) {
-            return new Instructor($instractors);
-        }, $instractors);
-    }
+
     public static function mapToUsersArray(array $users): array {
         return array_map(function($user) {
             return self::mapArrayToObj($user);
