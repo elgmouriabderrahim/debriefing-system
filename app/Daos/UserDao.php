@@ -12,20 +12,6 @@ class UserDao {
         return (int) $stmt->fetchColumn();
     }
 
-    public static function countAllLearners(): int {
-        $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM users WHERE role = 'Learner'");
-        $stmt->execute();
-        return (int) $stmt->fetchColumn();
-    }
-
-    public static function countAllInstructors(): int {
-        $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM users WHERE role = 'Instructor'");
-        $stmt->execute();
-        return (int) $stmt->fetchColumn();
-    }
-
     public static function getById(int $id): ?array {
         $pdo = Database::getInstance()->getconnection();
         $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
@@ -69,13 +55,6 @@ class UserDao {
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public static function getClassInstructors(int $classId): array {
-        $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE class_id = :classId AND role = 'Instructor'");
-        $stmt->bindValue(':classId', $classId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

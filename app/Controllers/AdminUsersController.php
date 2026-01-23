@@ -49,4 +49,5 @@ class AdminUsersController extends BaseController{
         $userService->deleteUser($userId);
         header("location: /admin/users");
     }
+    
 }
