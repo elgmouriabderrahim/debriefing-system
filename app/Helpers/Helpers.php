@@ -2,6 +2,37 @@
 namespace App\Helpers;
 
 class Helpers {
+    public static function sanitize(?string $data): string
+    {
+        return trim($data ?? '');
+    }
+
+    public static function validateClassName(string $name): array
+    {
+        $errors = [];
+        $name = self::sanitize($name);
+
+        if ($name === '') {
+            $errors['name'] = 'Classroom name is required.';
+        }
+
+        return $errors;
+    }
+
+    public static function validateClassYear($promotionYear): array
+    {
+        $errors = [];
+
+        $promotionYear = self::sanitize((string) $promotionYear);
+
+        if ($promotionYear === '') {
+            $errors['promotionYear'] = 'Promotion year is required.';
+        } elseif (!ctype_digit($promotionYear)) {
+            $errors['promotionYear'] = 'Promotion year must be a number.';
+        }
+
+        return $errors;
+    }
     
     public static function ValidateName(string $name,string $field): array {
         $errors = [];

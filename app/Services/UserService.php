@@ -16,13 +16,6 @@ class UserService {
     public function getUsersCount(): int {
         return UserRepository::countAll();
     }
-    public function getLearnersCount(): int {
-        return UserRepository::countAllLearners();
-    }
-
-    public function getInstructorsCount(): int {
-        return UserRepository::countAllInstructors();
-    }
 
     public function getRecentUserActivity(int $limit): array {
         return UserRepository::getRecentUserActivity($limit);
