@@ -13,8 +13,8 @@
         </div>
 
         <a href="/admin/competences/create"
-           class="px-4 py-2  shadow-md rounded-lg hover:shadow-lg hover:bg-neutral-100">
-            <i class="fa-solid fa-square-plus text-green-600"></i> Add Competence
+           class="px-4 py-2 ">
+            <i class="fa-solid fa-feather-pointed text-green-600"></i></i> Add Competence
         </a>
     </div>
 
@@ -35,15 +35,13 @@
                     <td class="p-4 font-mono text-gray-800">{{ $competence->getCode() }}</td>
                     <td class="p-4 font-medium">{{ $competence->getLabel() }}</td>
                     <td class="p-4 text-right flex justify-end gap-3">
-                        <a href="/admin/competences/{{ $competence->id }}/add" class="text-blue-600 hover:underline">
-                            Add
-                        </a>
-
-                        <form action="/admin/competences/{{ $competence->id }}" method="POST">
-                            <button type="submit" class="text-red-600 hover:underline">
-                                Delete
+                        <form action="/admin/competences/delete" method="POST" class="inline">
+                            <input type="hidden" name="competenceId" value="{{ $competence->getId() }}">
+                            <button type="submit" class="flex text-red-600 hover:text-red-800 transition-transform transform hover:scale-120 px-4 cursor-pointer">
+                                <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

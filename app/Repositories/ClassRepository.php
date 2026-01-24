@@ -5,7 +5,7 @@ use App\Daos\ClassDao;
 use App\Mappers\ClassMapper;
 use App\Models\Classroom;
 
-use App\Mappers\InstractorMapper;
+use App\Mappers\InstructorMapper;
 use App\Mappers\LearnerMapper;
 
 
@@ -50,10 +50,10 @@ class ClassRepository {
         $learners = ClassDao::getClassLearners($classId);
         return LearnerMapper::mapArraysToLearners($learners);
     }
-    public static function getClassInstractors(int $classId): array
+    public static function getClassInstructors(int $classId): array
     {
-        $instractors = ClassDao::getClassInstractors($classId);
-        return InstractorMapper::mapToInstractorsArray($instractors);
+        $instructors = ClassDao::getClassInstructors($classId);
+        return InstructorMapper::mapToInstructorsArray($instructors);
     }
     
 }

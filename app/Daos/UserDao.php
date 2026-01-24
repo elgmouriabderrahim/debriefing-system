@@ -23,7 +23,8 @@ class UserDao {
 
     public static function getRecentUserActivity(int $limit): array {
         $pdo = Database::getInstance()->getconnection();
-        $sql = "
+        $sql =
+        "
             (
                 SELECT
                     CONCAT(u.first_name, ' ', u.last_name) AS user,

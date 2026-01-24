@@ -13,8 +13,8 @@
         </div>
 
         <a href="/admin/user/add"
-           class="px-4 py-2  shadow-md rounded-lg hover:shadow-lg hover:bg-neutral-100">
-            <i class="fa-solid fa-square-plus text-green-600"></i> Add User
+           class="px-4 py-2">
+            <i class="fa-solid fa-user-plus text-green-600"></i> Add User
         </a>
     </div>
 
@@ -47,20 +47,19 @@
                     </td>
                     <td class="p-4 text-gray-500">{{ $user->getCreatedAt()->format('Y-m-d H:i:s') }}</td>
                     @if($user->getRole() === 'Learner')
-                    <td class="p-4 text-gray-500">{{ $user->getClassroom()->getName() }}</td>
+                        <td class="p-4 text-gray-500">{{ $user->getClassroom()->getName() }}</td>
                     @else
-                    <td class="p-4 text-gray-500 italic">N/A</td>
+                        <td class="p-4 text-gray-500 italic">N/A</td>
                     @endif
                     <td class="p-4 flex space-x-2">
-                    @if($user->getRole()->value === "Instructor")
-                        <a href="/admin/user/assign?user_id={{ $user->getId() }}" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-blue-700 text-xs">Assign Class</a>
+                        @if($user->getRole()->value === "Instructor")
                         <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
-                    @elseif($user->getRole()->value === "Learner")
-                        <a href="/admin/user/assign?user_id={{ $user->getId() }}" class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs">Assign to Class</a>
-                        <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
-                    @else
-                        <span class="text-gray-400 text-xs italic">No actions available</span>
-                    @endif
+                            <a href="/admin/instructor/assign?instructor_id={{ $user->getId() }}" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-700 text-xs">Assign Class</a>
+                        @elseif($user->getRole()->value === "Learner")
+                            <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                        @else
+                            <span class="text-gray-400 text-xs italic">No actions available</span>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

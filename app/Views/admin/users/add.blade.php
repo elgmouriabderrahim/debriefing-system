@@ -1,106 +1,172 @@
 @extends('layouts.main')
+
 @section('title', 'Debriefing - Create New User')
-@section('page-title', 'Create New User')
 
 @section('content')
-<div class="w-[90%] lg:max-w-lg p-6 mx-auto">
+<div class="max-w-4xl mx-auto space-y-6">
 
-    <h1 class="text-3xl font-bold mb-2 text-center">Create Account</h1>
-    <p class="text-gray-400 mb-6 text-center">
-        Add a new user to the platform as an Instructor or Learner.
-    </p>
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900">Create Account</h1>
+        <p class="text-gray-500 mt-1">
+            Add a new user to the platform as an Instructor or Learner
+        </p>
+    </div>
 
     <?php if(isset($success) && $success): ?>
-        <div class="bg-green-100 border border-green-300 text-green-800 p-3 rounded-lg mb-4">
+        <div class="bg-green-50 border border-green-200 text-green-700 rounded-lg p-4">
             <?= htmlspecialchars($success) ?>
         </div>
     <?php endif; ?>
 
-    <form action="/admin/user/add" method="post" class="space-y-4">
-        <div class="relative">
-            <label for="firstName" class="block text-sm font-medium text-gray-800">First Name</label>
-            <div class="relative">
-                <i class="fa-solid fa-address-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" name="firstName" id="firstName" placeholder="First Name"
-                    value="<?= htmlspecialchars($inputData['firstName'] ?? '') ?>"
-                    class="w-full pl-10 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['firstName'] ?? '') ?>
-            </span>
+    <form action="/admin/user/add" method="post"
+          class="bg-white p-6 rounded-xl shadow-sm border space-y-6">
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                First Name
+            </label>
+
+            <input
+                type="text"
+                name="firstName"
+                value="<?= htmlspecialchars($inputData['firstName'] ?? '') ?>"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['firstName']) ? 'border-red-500' : 'border-gray-300' ?>"
+                placeholder="Enter the first name"
+            >
+
+            <?php if(isset($errors['firstName'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['firstName']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
-        <div class="relative">
-            <label for="lastName" class="block text-sm font-medium text-gray-800">Last Name</label>
-            <div class="relative">
-                <i class="fa-solid fa-address-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name"
-                    value="<?= htmlspecialchars($inputData['lastName'] ?? '') ?>"
-                    class="w-full pl-10 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['lastName'] ?? '') ?>
-            </span>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Last Name
+            </label>
+
+            <input
+                type="text"
+                name="lastName"
+                value="<?= htmlspecialchars($inputData['lastName'] ?? '') ?>"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['lastName']) ? 'border-red-500' : 'border-gray-300' ?>"
+                placeholder="Enter the last name"
+            >
+
+            <?php if(isset($errors['lastName'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['lastName']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Email Address
+            </label>
 
-        <div class="relative">
-            <label for="email" class="block text-sm font-medium text-gray-800">Email</label>
-            <div class="relative">
-                <i class="fa-solid fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="email" name="email" id="email" placeholder="Email Address"
-                    value="<?= htmlspecialchars($inputData['email'] ?? '') ?>"
-                    class="w-full pl-10 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['email'] ?? '') ?>
-            </span>
+            <input
+                type="email"
+                name="email"
+                value="<?= htmlspecialchars($inputData['email'] ?? '') ?>"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['email']) ? 'border-red-500' : 'border-gray-300' ?>"
+                placeholder="Enter the email"
+            >
+
+            <?php if(isset($errors['email'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['email']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
-        <div class="relative">
-            <label for="password" class="block text-sm font-medium text-gray-800">Password</label>
-            <div class="relative">
-                <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="password" name="password" id="password" placeholder="Enter a password"
-                    class="w-full pl-10 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['password'] ?? '') ?>
-            </span>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['password']) ? 'border-red-500' : 'border-gray-300' ?>"
+                placeholder="********"
+            >
+
+            <?php if(isset($errors['password'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['password']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
-        <div class="relative">
-            <label for="cpassword" class="block text-sm font-medium text-gray-800">Confirm Password</label>
-            <div class="relative">
-                <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="password" name="cpassword" id="cpassword" placeholder="Confirm the password"
-                    class="w-full pl-10 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['cpassword'] ?? '') ?>
-            </span>
+        <!-- Confirm Password -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                name="cpassword"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['cpassword']) ? 'border-red-500' : 'border-gray-300' ?>"
+                placeholder="********"
+            >
+
+            <?php if(isset($errors['cpassword'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['cpassword']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
-        <div class="relative">
-            <label for="role" class="block text-sm font-medium text-gray-800">Role</label>
-            <select name="role" id="role"
-                class="w-full mt-1 pl-3 pr-3 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="Learner" <?= (isset($inputData['role']) && $inputData['role'] === 'Learner') ? 'selected' : '' ?>>Learner</option>
-                <option value="Instructor" <?= (isset($inputData['role']) && $inputData['role'] === 'Instructor') ? 'selected' : '' ?>>Instructor</option>
+        <!-- Role -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Role
+            </label>
+
+            <select
+                name="role"
+                class="w-full border-0 border-b focus:ring-0 focus:outline-none
+                       <?= isset($errors['role']) ? 'border-red-500' : 'border-gray-300' ?>">
+                <option value="Learner"
+                    <?= (isset($inputData['role']) && $inputData['role'] === 'Learner') ? 'selected' : '' ?>>
+                    Learner
+                </option>
+                <option value="Instructor"
+                    <?= (isset($inputData['role']) && $inputData['role'] === 'Instructor') ? 'selected' : '' ?>>
+                    Instructor
+                </option>
             </select>
-            <span class="text-red-500 block mt-1 text-sm">
-                <?= htmlspecialchars($errors['role'] ?? '') ?>
-            </span>
+
+            <?php if(isset($errors['role'])): ?>
+                <p class="text-sm text-red-600 mt-1">
+                    <?= htmlspecialchars($errors['role']) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
-        <button type="submit" class="w-full py-3 bg-blue-200 rounded-lg font-semibold hover:bg-blue-300 transition cursor-pointer">
-            Create Account
-        </button>
+        <div class="flex justify-between items-center pt-4">
+            <a href="/admin/users"
+               class="px-4 py-1 text-sm font-medium text-gray-800
+                      bg-neutral-100 hover:bg-neutral-200 rounded-lg transition">
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="px-4 py-1 rounded-lg bg-green-600 text-white
+                       text-sm font-medium hover:bg-green-700 transition">
+                <i class="fa-solid fa-user-plus"></i> Create
+            </button>
+        </div>
+
     </form>
-
-    <p class="text-center text-gray-400 mt-6">
-        <a href="/admin/dashboard" class="underline hover:text-blue-400">Return to home</a>
-    </p>
-
 </div>
 @endsection
