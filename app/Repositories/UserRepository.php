@@ -12,6 +12,8 @@ class UserRepository {
 
     public static function getById(int $id): ?User {
         $user =  UserDao::getById($id);
+        if(!user)
+            return null;
         return UserMapper::mapArrayToObj($user);
     }
 

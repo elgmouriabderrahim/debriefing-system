@@ -4,11 +4,10 @@ namespace App\Mappers;
 use App\Models\Instructor;
 use App\Models\Learner;
 use App\Models\Admin;
+use App\Models\User;
 
 class UserMapper {
     public static function mapArrayToObj(array $user): User {
-        if (!$user)
-            return null;
 
         if($user['role'] === 'Instructor') {
             return new Instructor($user);

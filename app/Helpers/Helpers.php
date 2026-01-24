@@ -78,4 +78,39 @@ class Helpers {
         }
         return $errors;
     }
+
+    public static function validateSprintInputs(array $data): array
+    {
+        $errors = [];
+
+        $name = self::sanitize($data['name']);
+        $duration_days = self::sanitize($data['duration_days']);
+        $sprint_order = self::sanitize($data['sprint_order']);
+
+        if ($name === '') {
+            $errors['name'] = 'Sprint name is required.';
+        } elseif (strlen($name) < 3) {
+            $errors['name'] = 'Sprint name must be at least 3 characters.';
+        } elseif (strlen($name) > 100) {
+            $errors['name'] = 'Sprint name must not exceed 100 characters.';
+        }
+
+        if ($duration_days === '') {
+            $errors['duration_days'] = 'Duration is required.';
+        } elseif (!ctype_digit((string) $duration_days)) {
+            $errors['duration_days'] = 'Duration Days must be a valid number.';
+        } elseif ((int) $duration_days <= 0) {
+            $errors['duration_days'] = 'Duration must be greater than 0.';
+        }
+
+        if ($sprint_order === '') {
+            $errors['sprint_order'] = 'Sprint order is required.';
+        } elseif (!ctype_digit((string) $sprint_order)) {
+            $errors['sprint_order'] = 'Sprint order must be a valid number.';
+        } elseif ((int) $sprint_order <= 0) {
+            $errors['sprint_order'] = 'Sprint order must be greater than 0.';
+        }
+
+        return $errors;
+    }
 }
