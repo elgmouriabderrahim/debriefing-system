@@ -54,8 +54,27 @@ CREATE TABLE sprints (
     name VARCHAR(100) NOT NULL,
     duration_days INT NOT NULL,
     sprint_order INT NOT NULL,
+);
+
+
+CREATE TABLE class_sprints (
     class_id INT NOT NULL,
-    CONSTRAINT fk_sprint_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    sprint_id INT NOT NULL,
+
+    sprint_order INT NOT NULL,
+
+    PRIMARY KEY (class_id, sprint_id),
+
+    CONSTRAINT fk_cs_class
+        FOREIGN KEY (class_id)
+        REFERENCES classes(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_cs_sprint
+        FOREIGN KEY (sprint_id)
+        REFERENCES sprints(id)
+        ON DELETE CASCADE,
+
     UNIQUE (class_id, sprint_order)
 );
 

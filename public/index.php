@@ -18,6 +18,9 @@ $router->post('/admin/class/delete', "AdminClassesController@delete");
 
 
 $router->get('/admin/sprints', "AdminSprintsController@index");
+$router->get('/admin/sprint/create', "AdminSprintsController@create");
+$router->post('/admin/sprint/create', "AdminSprintsController@store");
+$router->post('/admin/sprint/delete', "AdminSprintsController@delete");
 
 $router->get('/admin/competences', "AdminCompetencesController@index");
 

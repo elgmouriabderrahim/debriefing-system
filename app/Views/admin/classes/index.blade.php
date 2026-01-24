@@ -13,8 +13,8 @@
         </div>
 
         <a href="/admin/class/create"
-           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            + Create Class
+           class="px-4 py-2 transition">
+            <i class="fa-solid fa-square-plus text-green-600"></i> Create Class
         </a>
     </div>
 

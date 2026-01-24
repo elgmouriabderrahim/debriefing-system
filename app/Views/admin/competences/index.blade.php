@@ -13,8 +13,8 @@
         </div>
 
         <a href="/admin/competences/create"
-           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            + Add Competence
+           class="px-4 py-2  shadow-md rounded-lg hover:shadow-lg hover:bg-neutral-100">
+            <i class="fa-solid fa-square-plus text-green-600"></i> Add Competence
         </a>
     </div>
 

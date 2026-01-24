@@ -20,5 +20,15 @@ class SprintRepository {
         }
         return SprintMapper::mapToObjArray($sprints);
     }
+
+    public static function create(array $data): void
+    {
+        Sprintdao::create($data);
+    }
+
+    public static function delete(int $id): void
+    {
+        Sprintdao::delete($id);
+    }
 }
 

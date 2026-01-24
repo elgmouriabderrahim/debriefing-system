@@ -25,4 +25,26 @@ class SprintDao {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function create(array $data): void
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare(
+            "INSERT INTO sprints (name, duration_days, sprint_order)
+            VALUES (:name, :duration_days, :sprint_order)
+        ");
+
+        $stmt->execute([
+            ':name' => $data['name'],
+            ':duration_days' => $data['duration_days'],
+            ':sprint_order' => $data['sprint_order'],
+        ]);
+    }
+
+    public static function delete(int $id): void
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("DELETE FROM sprints WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+    }
+
 }
