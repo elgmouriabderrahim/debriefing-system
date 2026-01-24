@@ -5,7 +5,7 @@ use App\Core\BaseController;
 
 use App\Services\ClassService;
 use App\Services\UserService;
-use App\Services\InstractorService;
+use App\Services\InstructorService;
 use App\Services\LearnerService;
 use App\Services\SprintService;
 use App\Services\BriefService;
@@ -15,7 +15,7 @@ class AdminDashboardController extends BaseController{
 
     public function index() {
         $userService = UserService::getInstance();
-        $instractorService = InstractorService::getInstance();
+        $instructorService = InstructorService::getInstance();
         $learnerService = LearnerService::getInstance();
         $classService = ClassService::getInstance();
         $sprintService = SprintService::getInstance();
@@ -23,7 +23,7 @@ class AdminDashboardController extends BaseController{
 
         $totalUsers = $userService->getUsersCount();
         $totalLearners = $learnerService->getLearnersCount();
-        $totalInstructors = $instractorService->getInstructorsCount();
+        $totalInstructors = $instructorService->getInstructorsCount();
         $totalClasses = $classService->geClassesCount();
         $totalSprints = $sprintService->getSprintsCount();
         $totalBriefs = $briefService->getTotalBriefs();

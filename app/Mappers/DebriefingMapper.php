@@ -8,8 +8,8 @@ class DebriefingMapper {
         return array_map(function($debriefing) {
             $debriefings['brief'] = BriefRepository::getBriefById($debriefings['brief_id']);
             $debriefings['learner'] = LearnerRepository::getLearnerById($debriefings['learner_id']);
-            $debriefings['instractor'] = InstractorRepository::getInstractorById($debriefings['instractor_id']);
-            unset($debriefings['brief_id'], $debriefings['learner_id'], $debriefings['instractor_id']);
+            $debriefings['instructor'] = InstructorRepository::getInstructorById($debriefings['instructor_id']);
+            unset($debriefings['brief_id'], $debriefings['learner_id'], $debriefings['instructor_id']);
         }, $debriefings);
     }
 

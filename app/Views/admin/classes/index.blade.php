@@ -13,8 +13,8 @@
         </div>
 
         <a href="/admin/class/create"
-           class="px-4 py-2 transition">
-            <i class="fa-solid fa-square-plus text-green-600"></i> Create Class
+           class="px-4 py-2 transition transition-transform transform hover:scale-110 px-4 cursor-pointer">
+            <i class="fa-solid fa-rectangle-list text-green-600"></i> Create Class
         </a>
     </div>
 
@@ -50,12 +50,14 @@
                             @endif
                         </ul>
                     </td>
-                    <td class="p-4 text-right space-x-2">
-                        <a href="/admin/class/view?id={{ $class->getId() }}" class="text-blue-600 "><i class="fa-regular fa-eye"></i></a>
-                        <a href="#" class=""><i class="fa-solid fa-file-pen"></i></a>
-                        <form action="/admin/class/delete" method="POST" class="inline">
+                    <td class="p-4 text-right space-x-2 ">
+                        <a href="/admin/class/view?id={{ $class->getId() }}"><i class="fa-regular fa-eye text-blue-600 hover:text-blue-800 transition-transform transform hover:scale-120"></i></a>
+                        <a href="#"><i class="fa-solid text-neutral-700 fa-file-pen hover:text-neutral-900 transition-transform transform hover:scale-120"></i></a>
+                        <form action="/admin/class/delete" method="POST" class="inline ">
                             <input type="hidden" value="{{ $class->getId() }}" name="classId">
-                            <button class="cursor-pointer"><i class="fa-solid fa-trash-can text-red-500"></i></button>
+                            <button class="text-red-600 hover:text-red-800 transition-transform transform hover:scale-120 cursor-pointer">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>

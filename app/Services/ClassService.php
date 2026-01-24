@@ -41,10 +41,13 @@ class ClassService {
         ClassRepository::delete($id);
     }
 
-    public function getClassLearners(int $classId): array {
+    public function getClassLearners(int $classId): array
+    {
         return ClassRepository::getClassLearners($classId);
     }
-    public function getClassInstractors(int $classId): array {
-        return ClassRepository::getClassInstractors($classId);
+
+    public function getClassInstructors(int $classId): array
+    {
+        return ClassRepository::getClassInstructors($classId);
     }
 }
