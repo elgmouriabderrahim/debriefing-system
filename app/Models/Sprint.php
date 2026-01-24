@@ -1,25 +1,25 @@
 <?php
 namespace App\Models;
 
+use App\Models\Classroom;
+
 class Sprint
 {
     private int $id;
     private string $name;
-    private int $duration;
-    private int $order;
-    private ?Classroom $classroom;
+    private int $durationDays;
+    private int $sprintOrder;
 
-    public function __construct($data) {
+    public function __construct(array $data)
+    {
         $this->id = $data['id'];
         $this->name = $data['name'];
-        $this->duration = $data['duration'];
-        $this->order = $data['order'];
-        $this->classroom = $data['classroom'];
+        $this->durationDays = $data['duration_days'];
+        $this->sprintOrder = $data['sprint_order'];
     }
 
-    public function getId(): int {return $this->id;}
-    public function getName(): string {return $this->name;}
-    public function getDuration(): int {return $this->duration;}
-    public function getOrder(): int {return $this->order;}
-    public function getClassroom(): Classroom { return $this->classroom; }
+    public function getId(): int { return $this->id; }
+    public function getName(): string { return $this->name; }
+    public function getDurationDays(): int { return $this->durationDays; }
+    public function getSprintOrder(): int { return $this->sprintOrder; }
 }
