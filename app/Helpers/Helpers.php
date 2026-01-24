@@ -113,4 +113,28 @@ class Helpers {
 
         return $errors;
     }
+
+
+    public static function validateCompetenceInputs(array $data): array
+    {
+        $errors = [];
+
+        $code = self::sanitize($data['code'] ?? '');
+        $label = self::sanitize($data['label'] ?? '');
+
+        if ($code === '') {
+            $errors['code'] = "Competence code is required.";
+        } elseif (strlen($code) > 10) {
+            $errors['code'] = "Competence code must be at most 10 characters.";
+        }
+
+        
+        if ($label === '') {
+            $errors['label'] = "Competence label is required.";
+        } elseif (strlen($label) > 500) {
+            $errors['label'] = "Competence label must be at most 255 characters.";
+        }
+
+        return $errors;
+    }
 }

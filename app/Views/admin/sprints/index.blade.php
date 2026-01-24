@@ -16,7 +16,7 @@
 
         <a href="/admin/sprint/create"
            class="px-4 py-2  transition">
-            <i class="fa-solid fa-square-plus text-green-600"></i> Create Sprint
+            <i class="fa-brands fa-sketch text-green-600"></i> Create Sprint
         </a>
     </div>
 

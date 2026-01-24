@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Core\BaseController;
 
 use App\Services\ClassService;
-use App\Services\InstractorService;
+use App\Services\InstructorService;
 
 class AdminClassesController extends BaseController{
 
@@ -49,11 +49,11 @@ class AdminClassesController extends BaseController{
         $class = $classService->getById($id);
 
         $classLearners = $classService->getClassLearners($id);
-        $classInstractors = $classService->getClassInstractors($id);
+        $classInstructors = $classService->getClassInstructors($id);
 
         echo $this->render(
             'admin.classes.view',
-            compact('class', 'classLearners', 'classInstractors')
+            compact('class', 'classLearners', 'classInstructors')
         );
     }
 

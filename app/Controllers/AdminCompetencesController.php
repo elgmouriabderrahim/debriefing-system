@@ -15,4 +15,35 @@ class AdminCompetencesController extends BaseController{
                 compact('competences')
             );
     }
+
+    public function create()
+    {
+        echo $this->render('admin.competences.create');
+    }
+
+    public function store()
+    {
+        $inputData = $_POST;
+
+        $errors = CompetenceService::create($inputData);
+        if (empty($errors)) {
+            header('Location: /admin/competences');
+            exit;
+        }
+
+        echo $this->render('admin.competences.create', [
+            'errors' => $errors,
+            'inputData' => $inputData
+        ]);
+    }
+
+    public function delete()
+    {
+        $competenceId = (int) ($_POST['competenceId'] ?? 0);
+
+        CompetenceService::delete($competenceId);
+        
+        header('Location: /admin/competences');
+        exit;
+    }
 }

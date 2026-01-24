@@ -86,7 +86,7 @@ class ClassDao {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getClassInstractors(int $classId): array
+    public static function getClassInstructors(int $classId): array
     {
         $pdo = Database::getInstance()->getconnection();
         $stmt = $pdo->prepare(
