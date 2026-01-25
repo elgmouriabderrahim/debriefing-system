@@ -18,4 +18,13 @@ class BriefDao {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getById($id): ?array
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM briefs WHERE id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?? null;
+    }
 }

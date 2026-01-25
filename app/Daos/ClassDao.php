@@ -28,40 +28,37 @@ class ClassDao {
         $stmt->execute(['name' => $inputData['name'], 'promotionYear' => $inputData['promotionYear']]);
     }
 
-    public static function findById(int $id): ?array
-    {
-        $pdo = Database::getInstance()->getconnection();
+    public static function getById(int $id): ?array
+{
+    $pdo = Database::getInstance()->getConnection();
 
-        $stmt = $pdo->prepare(
-            "SELECT 
-                c.*,
-                COUNT(u.id) AS students_count
-            FROM classes c
-            LEFT JOIN users u 
-                ON u.class_id = c.id AND u.role = 'Learner'
-            WHERE c.id = :id
-            GROUP BY c.id
-        ");
+    $stmt = $pdo->prepare(
+        "SELECT c.*, 
+                (SELECT COUNT(*) FROM users u WHERE u.class_id = c.id) AS students_count
+         FROM classes c
+         WHERE c.id = :id"
+    );
 
-        $stmt->execute(['id' => $id]);
-        $class = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute(['id' => $id]);
+    $class = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$class) {
-            return null;
-        }
-
-        $stmt = $pdo->prepare("
-            SELECT u.*
-            FROM users u
-            JOIN class_instructors ci ON ci.instructor_id = u.id
-            WHERE ci.class_id = :id
-        ");
-
-        $stmt->execute(['id' => $id]);
-        $class['instructors'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $class;
+    if (!$class) {
+        return null;
     }
+
+    $stmt = $pdo->prepare(
+        "SELECT u.*
+         FROM users u
+         JOIN class_instructors ci ON ci.instructor_id = u.id
+         WHERE ci.class_id = :id"
+    );
+
+    $stmt->execute(['id' => $id]);
+    $class['instructors'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $class;
+}
+
 
     public static function delete(int $id): void
     {

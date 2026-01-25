@@ -14,14 +14,16 @@ class ClassRepository {
     public static function countAll(): int {
         return ClassDao::countAll();
     }
+
     public static function getAll(): array {
         $classes = ClassDao::getAll();
         if (empty($classes)) {
             return [];
         }
-        return ClassMapper::maparrayToObj($classes);
+        return ClassMapper::ArraysToObjs($classes);
     }
-    public static function countStudentsInClass(int $classId): int {
+    
+    public static function countClassLeaners(int $classId): int {
         return ClassDao::countStudentsInClass($classId);
     }
 
@@ -29,15 +31,13 @@ class ClassRepository {
         ClassDao::create($inputData);
     }
 
-    public static function findById(int $id): ?Classroom
+    public static function getById(int $id): ?Classroom
     {
-        $classroom = ClassDao::findById($id);
-
+        $classroom = ClassDao::getById($id);
         if (!$classroom) {
             return null;
         }
-
-        return ClassMapper::mapToObj($classroom);
+        return ClassMapper::ArrayToObj($classroom);
     }
 
     public static function delete(int $id): void
@@ -45,15 +45,15 @@ class ClassRepository {
         ClassDao::delete($id);
     }
 
+
     public static function getClassLearners(int $classId): array
     {
         $learners = ClassDao::getClassLearners($classId);
-        return LearnerMapper::mapArraysToLearners($learners);
+        return LearnerMapper::ArraysToObjs($learners);
     }
     public static function getClassInstructors(int $classId): array
     {
         $instructors = ClassDao::getClassInstructors($classId);
-        return InstructorMapper::mapToInstructorsArray($instructors);
+        return InstructorMapper::ArraysToObjs($instructors);
     }
-    
 }

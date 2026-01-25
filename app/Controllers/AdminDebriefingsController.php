@@ -2,6 +2,9 @@
 namespace App\Controllers;
 use App\Core\BaseController;
 
+use App\Middlewears\Auth;
+Auth::AdminOnly();
+
 use App\Services\DebriefingService;
 
 class AdminDebriefingsController extends BaseController{
