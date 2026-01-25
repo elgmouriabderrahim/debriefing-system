@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Middlewears\Auth;
-Auth::AdminOnly();
+Auth::adminOnly();
 
 use App\Core\BaseController;
 use App\Services\InstructorService;
