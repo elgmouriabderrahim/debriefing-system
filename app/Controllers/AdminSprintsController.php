@@ -6,6 +6,7 @@ Auth::adminOnly();
 
 use App\Core\BaseController;
 use App\Services\SprintService;
+use App\Services\ClassService;
 
 class AdminSprintsController extends BaseController{
 
@@ -50,5 +51,46 @@ class AdminSprintsController extends BaseController{
 
         header('Location: /admin/sprints');
         exit;
+    }
+
+    public function showAssign()
+    {
+        $sprintId = $_GET['sprint_id'] ?? 0;
+
+        $sprintService = SprintService::getInstance();
+        $classService = ClassService::getInstance();
+
+        $sprint = $sprintService->getById($sprintId);
+
+        if(!$sprint){
+            header("location: admin/sprints");
+            exit;
+        }
+        $classes = $classService->getAll();
+        $assignedClasses = $sprintService->getAssignedClassIds($sprintId);
+
+        echo $this->render('admin.sprints.assign', compact('sprint', 'classes', 'assignedClasses'));
+    }
+    public function assign()
+    {
+        $sprintId = $_POST['sprint_id'] ?? 0;
+        $classIds = $_POST['class_ids'] ?? [];
+
+        $sprintService = SprintService::getInstance();
+        $classService = ClassService::getInstance();
+
+        $sprint = $sprintService->getById($sprintId);
+        if (!$sprint) {
+            header("Location: /admin/sprints");
+            exit;
+        }
+
+        $sprintService->assignToClasses($sprintId, $classIds);
+
+        $classes = $classService->getAll();
+        $assignedClasses = $sprintService->getAssignedClassIds($sprintId);
+
+        $success = "Sprint assigned successfully!";
+        echo $this->render('admin.sprints.assign', compact('sprint', 'classes', 'assignedClasses', 'success'));
     }
 }

@@ -61,8 +61,6 @@ CREATE TABLE class_sprints (
     class_id INT NOT NULL,
     sprint_id INT NOT NULL,
 
-    sprint_order INT NOT NULL,
-
     PRIMARY KEY (class_id, sprint_id),
 
     CONSTRAINT fk_cs_class
@@ -74,8 +72,6 @@ CREATE TABLE class_sprints (
         FOREIGN KEY (sprint_id)
         REFERENCES sprints(id)
         ON DELETE CASCADE,
-
-    UNIQUE (class_id, sprint_order)
 );
 
 
@@ -134,5 +130,15 @@ CREATE TABLE debriefing_competence (
     CONSTRAINT fk_dc_debriefing FOREIGN KEY (debriefing_id) REFERENCES debriefings(id) ON DELETE CASCADE,
     CONSTRAINT fk_dc_competence FOREIGN KEY (competence_id) REFERENCES competences(id) ON DELETE CASCADE,
     PRIMARY KEY (debriefing_id, competence_id)
+);
+
+CREATE TABLE livrables (
+    learner_id INT NOT NULL,
+    brief_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    content TEXT NOT NULL,
+
+    CONSTRAINT fk_l_learner FOREIGN KEY (learner_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_l_brief FOREIGN KEY (brief_id) REFERENCES briefs(id) ON DELETE CASCADE
 );
 

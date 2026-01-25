@@ -48,6 +48,12 @@
                             </td>
 
                             <td class="p-4 text-right space-x-3">
+
+                                <a href="/admin/sprint/assign?sprint_id={{ $sprint->getId() }}"
+                                   class="text-green-600 cursor-pointer hover:text-green-800">
+                                    <i class="fa-solid fa-down-left-and-up-right-to-center"></i> Assign
+                                </a>
+
                                 <a href="/admin/sprint?sprint_id={{ $sprint->getId() }}"
                                    class="text-blue-600 ">
                                     <i class="fa-solid fa-eye"></i>
@@ -64,6 +70,7 @@
                                         <i class="fa-solid fa-trash-can"></i>   
                                     </button>
                                 </form>
+                                
                             </td>
                         </tr>
                     @endforeach
