@@ -30,5 +30,21 @@ class SprintRepository {
     {
         Sprintdao::delete($id);
     }
+
+
+    public static function assignToClass(int $sprintId, int $classId)
+    {
+        Sprintdao::insertAssignment($sprintId, $classId);
+    }
+
+    public static function removeAllAssignments(int $sprintId)
+    {
+        Sprintdao::deleteAssignmentsBySprint($sprintId);
+    }
+
+    public static function getAssignedClassIds(int $sprintId): array
+    {
+        return Sprintdao::getAssignedClassIds($sprintId);
+    }
 }
 

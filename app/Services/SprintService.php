@@ -27,9 +27,27 @@ class SprintService {
             Sprintrepository::create($data);
         return $errors;
     }
+
+    public function getById(int $id)
+    {
+        return SprintRepository::getById($id);
+    }
     public function deleteSprint(int $sprintId): void
     {
         SprintRepository::delete($sprintId);
     }
 
+    public function assignToClasses(int $sprintId, array $classIds)
+    {
+        SprintRepository::removeAllAssignments($sprintId);
+
+        foreach ($classIds as $classId) {
+            SprintRepository::assignToClass($sprintId, (int)$classId);
+        }
+    }
+
+    public function getAssignedClassIds(int $sprintId): array
+    {
+        return SprintRepository::getAssignedClassIds($sprintId);
+    }
 }
