@@ -47,4 +47,26 @@ class SprintDao {
         $stmt->execute([':id' => $id]);
     }
 
+    public static function insertAssignment(int $sprintId, int $classId)
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("INSERT INTO class_sprints (sprint_id, class_id) VALUES (:sprint_id, :class_id)");
+        $stmt->execute(['sprint_id' => $sprintId, 'class_id' => $classId]);
+    }
+
+    public static function deleteAssignmentsBySprint(int $sprintId)
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("DELETE FROM class_sprints WHERE sprint_id = :sprint_id");
+        $stmt->execute(['sprint_id' => $sprintId]);
+    }
+
+    public static function getAssignedClassIds(int $sprintId): array
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("SELECT class_id FROM class_sprints WHERE sprint_id = :sprint_id");
+        $stmt->execute(['sprint_id' => $sprintId]);
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
 }

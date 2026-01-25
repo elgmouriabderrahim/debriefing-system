@@ -21,6 +21,8 @@ $router->get('/admin/sprints', "AdminSprintsController@index");
 $router->get('/admin/sprint/create', "AdminSprintsController@create");
 $router->post('/admin/sprint/create', "AdminSprintsController@store");
 $router->post('/admin/sprint/delete', "AdminSprintsController@delete");
+$router->get('/admin/sprint/assign', "AdminSprintsController@showAssign");
+$router->post('/admin/sprint/assign', "AdminSprintsController@assign");
 
 $router->get('/admin/competences', "AdminCompetencesController@index");
 $router->get('/admin/competences/create', "AdminCompetencesController@create");
