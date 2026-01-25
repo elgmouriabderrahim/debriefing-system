@@ -15,7 +15,7 @@ class InstructorDao {
 
     public static function getClassInstructors(int $classId): array {
         $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE class_id = :classId AND role = 'Instructor'");
+        $stmt = $pdo->prepare("SELECT u.* FROM users u JOIN class_instructors ci on ci.instructor_id = u.id and  ci.class_id = :classId");
         $stmt->bindValue(':classId', $classId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,10 +33,25 @@ class InstructorDao {
     public static function assignClass(int $classId,int $instructorId): void
     {
         $pdo = Database::getInstance()->getconnection();
-        $stmt = $pdo->prepare("insert into class_instructors(class_id, instructor_id) values(:classId, :instructorId)");
+        $stmt = $pdo->prepare(
+            "INSERT INTO class_instructors(class_id, instructor_id)
+            values(:classId, :instructorId)
+            ON CONFLICT (class_id, instructor_id) DO NOTHING;"
+        );
         $stmt->bindValue(':classId', $classId, PDO::PARAM_INT);
         $stmt->bindValue(':instructorId', $instructorId, PDO::PARAM_INT);
         $stmt->execute();
     }
 
+    public static function getInstructorClasses($instructorId): array
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare(
+            "SELECT c.* FROM classes c
+            join class_instructors ci 
+            on ci.class_id = c.id and ci.instructor_id = :instructorId"
+            );
+        $stmt->execute([':instructorId' => $instructorId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

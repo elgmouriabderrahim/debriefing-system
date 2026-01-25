@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Instructor extends User
 {
-    private array $classrooms;
+    private array $classrooms = [];
 
     public function __construct($data) {
         parent::__construct([...$data, 'role' => 'Instructor']);
@@ -12,5 +12,5 @@ class Instructor extends User
     }
 
     public function getClassrooms(): array {return $this->classrooms;}
-    public function setClassroom($classroom): void { $this->classrooms[] = $classroom;}
+    public function addClassroom($classroom): void { $this->classrooms[] = $classroom;}
 }

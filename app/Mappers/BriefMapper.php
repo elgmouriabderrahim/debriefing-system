@@ -11,9 +11,14 @@ class BriefMapper {
         }, $briefs);
     }
 
-    public static function mapArrayToObj(array $briefs): array {
+    public static function arraysToObjs(array $briefs): array {
         return array_map(function($brief) {
             return new Brief($brief);
         }, $briefs);
+    }
+
+    public static function arrayToObj(array $brief): ?Brief
+    {
+        return new Brief($brief) ?? null;
     }
 }

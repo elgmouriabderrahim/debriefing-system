@@ -2,19 +2,21 @@
 namespace App\Mappers;
 
 use App\Models\Classroom;
+use App\Models\Instructor;
+
 use App\Repositories\ClassRepository;
 use App\Repositories\InstructorRepository;
 
 class ClassMapper {
-    public static function mapArrayToObj(array $classes): array {
+    public static function ArraysToObjs(array $classes): array {
         return array_map(function($class) {
-            $class['students_count']  = ClassRepository::countStudentsInClass($class['id']);
-            $class['instructors'] = InstructorRepository::getClassInstructors($class['id'] );
+            $class['students_count']  = ClassRepository::countClassLeaners($class['id']);
+            $class['instructors'] = ClassRepository::getClassInstructors($class['id'] );
             return new Classroom($class);
         }, $classes);
     }
 
-    public static function mapToObj(array $class): Classroom
+    public static function ArrayToObj(array $class): Classroom
     {
         $class['instructors'] = array_map(
             fn($instructor) => new Instructor($instructor),
@@ -22,4 +24,6 @@ class ClassMapper {
         );
         return new Classroom($class);
     }
+
+
 }

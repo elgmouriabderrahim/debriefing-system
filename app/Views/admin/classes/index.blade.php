@@ -42,11 +42,11 @@
                     <td class="p-4 text-gray-600">
                         <ul>
                             @if(empty($class->getInstructors()))
-                            <li>N/A</li>
+                                <li>N/A</li>
                             @else
-                            @foreach ($class->getInstructors() as $instructor)
-                                <li>{{ $instructor->getFullName() }}</li>
-                            @endforeach
+                                @foreach ($class->getInstructors() as $instructor)
+                                    <li>{{ $instructor->getFullName() }}</li>
+                                @endforeach
                             @endif
                         </ul>
                     </td>
