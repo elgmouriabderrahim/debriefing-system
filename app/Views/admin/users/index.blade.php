@@ -46,14 +46,24 @@
                         </span>
                     </td>
                     <td class="p-4 text-gray-500">{{ $user->getCreatedAt()->format('Y-m-d H:i:s') }}</td>
-                    @if($user->getRole() === 'Learner')
+                    @if($user->getRole()->value === 'Learner')
                         <td class="p-4 text-gray-500">{{ $user->getClassroom()->getName() }}</td>
+                    @elseif($user->getRole()->value === 'Instructor')
+                        <td class="p-4 text-gray-500 italic">
+                            <ul>
+                                @foreach($user->getClassrooms() as $classroom)
+                                    <li>
+                                        {{ $classroom->getName() }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </td>
                     @else
                         <td class="p-4 text-gray-500 italic">N/A</td>
                     @endif
                     <td class="p-4 flex space-x-2">
                         @if($user->getRole()->value === "Instructor")
-                        <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1  bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>
                             <a href="/admin/instructor/assign?instructor_id={{ $user->getId() }}" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-700 text-xs">Assign Class</a>
                         @elseif($user->getRole()->value === "Learner")
                             <a href="/admin/user/delete?user_id={{ $user->getId() }}" class="px-2 py-1 bg-neutral-100 rounded text-red-600 hover:bg-neutral-200 text-xs"><i class="fa-solid fa-trash-can"></i></a>

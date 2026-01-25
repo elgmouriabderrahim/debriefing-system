@@ -11,6 +11,14 @@ class BriefRepository {
     public static function getRecentBriefs(int $limit): array {
         $briefs =  BriefDao::getRecentBriefs($limit);
         $briefs = BriefMapper::replaceIdsWithObj($briefs);
-        return BriefMapper::mapArrayToObj($briefs);
+        return BriefMapper::arraysToObjs($briefs);
+    }
+    public static function getById($briefId): ?Brief
+    {
+        $brief =  BriefDao::getById($briefId);
+
+        if(!$brief)
+            return null;
+        return BriefMapper::arrayToObj($brief);
     }
 }

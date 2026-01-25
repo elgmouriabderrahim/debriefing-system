@@ -9,5 +9,13 @@ class LearnerRepository {
     public static function countAllLearners(): int {
         return LearnerDao::countAllLearners();
     }
-   
+
+    public static function getById($learnerId): ?Learner
+    {
+        $learner =  LearnerDao::getById($learnerId);
+
+        if(!$learner)
+            return null;
+        return LearnerMapper::arrayToObj($learner);
+    }
 }

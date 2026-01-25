@@ -5,9 +5,10 @@ use App\Models\Instructor;
 
 class InstructorMapper {
     
-    public static function mapToInstructorsArray(array $instructors): array {
-        return array_map(function($instructors) {
-            return new Instructor($instructors);
+
+    public static function ArraysToObjs(array $instructors): array {
+        return array_map(function($instructor) {
+            return new Instructor($instructor);
         }, $instructors);
     }
 

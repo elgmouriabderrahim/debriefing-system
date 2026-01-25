@@ -21,11 +21,12 @@ class UserRepository {
         return UserDao::getRecentUserActivity($limit);
     }
 
+
     public static function getAll(): array {
         $users = UserDao::getAll();
         if (empty($users))
             return [];
-        return UserMapper::mapToUsersArray($users);
+        return UserMapper::arraysToObjs($users);
     }
     
     public static function addUser($inputData){

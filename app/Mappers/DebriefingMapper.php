@@ -3,12 +3,16 @@ namespace App\Mappers;
 use App\Models\Competence;
 use App\Models\Debriefing;
 
+use App\Repositories\BriefRepository;
+use App\Repositories\LearnerRepository;
+use App\Repositories\InstructorRepository;
+
 class DebriefingMapper {
     public static function replaceIdsWithObj($debriefings): array {
         return array_map(function($debriefing) {
-            $debriefings['brief'] = BriefRepository::getBriefById($debriefings['brief_id']);
-            $debriefings['learner'] = LearnerRepository::getLearnerById($debriefings['learner_id']);
-            $debriefings['instructor'] = InstructorRepository::getInstructorById($debriefings['instructor_id']);
+            $debriefings['brief'] = BriefRepository::getById($debriefings['brief_id']);
+            $debriefings['learner'] = LearnerRepository::getById($debriefings['learner_id']);
+            $debriefings['instructor'] = InstructorRepository::getById($debriefings['instructor_id']);
             unset($debriefings['brief_id'], $debriefings['learner_id'], $debriefings['instructor_id']);
         }, $debriefings);
     }

@@ -12,4 +12,13 @@ class LearnerDao {
         return (int) $stmt->fetchColumn();
     }
 
+    public static function getById($id): ?array
+    {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id AND role = 'Learner'");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?? null;
+    }
+
 }

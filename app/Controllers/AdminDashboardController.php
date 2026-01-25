@@ -1,6 +1,9 @@
 <?php
 namespace App\Controllers;
 
+use App\Middlewears\Auth;
+Auth::AdminOnly();
+
 use App\Core\BaseController;
 
 use App\Services\ClassService;
