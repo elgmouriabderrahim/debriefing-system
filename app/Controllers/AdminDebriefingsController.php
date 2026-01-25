@@ -3,7 +3,7 @@ namespace App\Controllers;
 use App\Core\BaseController;
 
 use App\Middlewears\Auth;
-Auth::AdminOnly();
+Auth::adminOnly();
 
 use App\Services\DebriefingService;
 

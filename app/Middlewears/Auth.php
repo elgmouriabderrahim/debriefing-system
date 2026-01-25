@@ -1,26 +1,26 @@
 <?php
 namespace App\Middlewears;
 class Auth {
-    public static function usersOnly(){
-        if(!isset($_SESSION['user_id'])){
+    public static function guestOnly(){
+        if(isset($_SESSION['userId'])){
             header("location: /");
             exit;
         }
     }
-    public static function AdminOnly(){
-        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== "Admin"){
-            header("location: /");
+    public static function adminOnly(){
+        if(!isset($_SESSION['userId']) || $_SESSION['userRole'] !== "Admin"){
+            header("location: /login");
             exit;
         }
     }
     public static function instructorOnly(){
-        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== "Instructor"){
+        if(!isset($_SESSION['userId']) || $_SESSION['userRole'] !== "Instructor"){
             header("location: /");
             exit;
         }
     }
     public static function learnerOnly(){
-        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== "Learner"){
+        if(!isset($_SESSION['userId']) || $_SESSION['userRole'] !== "Learner"){
             header("location: /");
             exit;
         }
