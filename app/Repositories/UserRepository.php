@@ -40,4 +40,11 @@ class UserRepository {
     public static function deleteUser(int $id): void {
         UserDao::deleteUser($id);
     }
+
+    public static function getByEmail(string $email): ?User {
+        $user =  UserDao::getByEmail($email);
+        if(!$user)
+            return null;
+        return UserMapper::ArrayToObj($user);
+    }
 }

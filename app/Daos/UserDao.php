@@ -101,4 +101,13 @@ class UserDao {
         $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
         $stmt->execute(['id' => $id]);
     }
+
+    public static function getByEmail(string $email): ?array {
+        $pdo = Database::getInstance()->getconnection();
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
 }

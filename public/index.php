@@ -35,4 +35,9 @@ $router->get('/admin/instructor/assign', "AdminInstructorsController@showAssignF
 $router->post('/admin/instructor/assign', "AdminInstructorsController@assignClass");
 
 $router->get('/admin/debriefings', "AdminDebriefingsController@index");
+
+$router->get('/login', "AuthController@showLogIn");
+$router->post('/login', "AuthController@logIn");
+$router->get('/logout', "AuthController@logOut");
+
 $router->dispatch();
